@@ -17,27 +17,27 @@ public class AttendedAdapter extends RecyclerView.Adapter<AttendedAdapter.ViewHo
     private List<String> mEvents;
 
     /**Pass in the event array into the constructor.
-     *@param events events passed into constructor*/
+     *@param events attanded events passed into constructor*/
     public AttendedAdapter(final List<String> events) {
         mEvents = events;
     }
 
-    /**Binds data to RecyclerView.*/
+    /**Initializes RV with a sub class constructor.*/
     public class ViewHolder extends RecyclerView.ViewHolder {
         /**Text view in each item of the RecyclerView.*/
         private TextView eventTextView;
         /**Button in each item of the RecyclerView.*/
         private Button availButton;
 
-        /** Binds data to RecyclerView.
-         * @param itemView each item*/
+        /** Initializes ViewHolder.
+         * @param itemView view object for entire recyler view item*/
         public ViewHolder(final View itemView) {
             super(itemView);
             eventTextView = (TextView) itemView.findViewById(R.id.event_name);
         }
     }
 
-    /** Binds data to RecyclerView.
+    /** Creates ViewHolder for RecyclerView.
      */
     @Override
     public AttendedAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {

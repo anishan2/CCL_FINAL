@@ -14,11 +14,11 @@ import java.util.ArrayList;
 
 /** Displays my events. */
 public class MyEventsActivity extends AppCompatActivity {
-    /** ArrayList for my events (history). */
+    /** ArrayList for my scheduled events. */
     private ArrayList<String> attended = new ArrayList<>();
 
     /**
-     * Run when our activity comes into view.
+     * Run when activity comes into view.
      *
      * @param savedInstanceState state that was saved by the activity last time it was paused
      */
@@ -48,7 +48,7 @@ public class MyEventsActivity extends AppCompatActivity {
     }
 
     /**
-     * Opens next view.
+     * Opens next view, which is the home page.
      * @param view next screen to jump to
      */
     public void openAllEvents(final View view) {

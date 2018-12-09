@@ -33,22 +33,22 @@ public final class MainActivity extends AppCompatActivity implements Serializabl
      */
     private static final String TAG = "Lab12:Main";
 
-    /** Array that holds all events pulled from TicketMaster. */
+    /** Array that holds all URLs pulled from TicketMaster. */
     private ArrayList<String> links = new ArrayList<>();
 
     /** Array that holds all events pulled from TicketMaster. */
     private ArrayList<String> events = new ArrayList<>();
 
-    /** Array that holds all events pulled from TicketMaster. */
+    /** Initialized null adapter. */
     private EventAdapter adapter;
 
-    /** Array that holds all events pulled from TicketMaster. */
+    /** Initialized null recycler view. */
     private RecyclerView rvEvents;
 
-    /** Array that holds all events pulled from TicketMaster. */
+    /** Checks if the RecyclerView has been filled. */
     private boolean isFilled = false;
 
-    /** Array that holds all events pulled from TicketMaster. */
+    /** Initialized null button for switching activities. */
     private Button myEvents;
 
     /**
@@ -58,7 +58,7 @@ public final class MainActivity extends AppCompatActivity implements Serializabl
 
 
     /**
-     * Run when our activity comes into view.
+     * Run when activity comes into view.
      *
      * @param savedInstanceState state that was saved by the activity last time it was paused
      */
@@ -79,7 +79,7 @@ public final class MainActivity extends AppCompatActivity implements Serializabl
     public void setRV() {
         rvEvents = (RecyclerView) findViewById(R.id.rvEvents);
         // Create adapter passing in the data
-        adapter = new EventAdapter(events);
+        adapter = new EventAdapter(this, events, links);
         // Attach the adapter to the RecyclerView to populate items
         rvEvents.setAdapter(adapter);
         // Set layout manager
@@ -88,7 +88,7 @@ public final class MainActivity extends AppCompatActivity implements Serializabl
     }
 
     /**
-     * Opens next view.
+     * Opens next view, which is the my events page.
      *
      * @param view next screen to jump to
      */
@@ -108,7 +108,7 @@ public final class MainActivity extends AppCompatActivity implements Serializabl
         /** Exception to be thrown if any. */
         private Exception exception;
 
-        /** Set progress bar visible.*/
+        /** Set button visible.*/
         protected void onPreExecute() {
             myEvents = findViewById(R.id.myEvents);
             myEvents.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +134,7 @@ public final class MainActivity extends AppCompatActivity implements Serializabl
             try {
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                         Request.Method.GET,
-                        "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&countryCode=US&stateCode=IL&city=Urbana&apikey=NLkAS2bWNylyGck1kAuFaJ2k01NvNAtk",
+                        "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&countryCode=US&stateCode=IL&city=Champaign&apikey=NLkAS2bWNylyGck1kAuFaJ2k01NvNAtk",
                         null,
                         new Response.Listener<JSONObject>() {
                             @Override
@@ -172,7 +172,7 @@ public final class MainActivity extends AppCompatActivity implements Serializabl
             return "Finished!";
         }
 
-        /** Get rid of progress bar.
+        /** Logs error if any.
          * @param response error message if any*/
         protected void onPostExecute(final String response) {
             if (response == null) {
